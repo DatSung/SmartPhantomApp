@@ -1,7 +1,7 @@
 import React, { useState,  useEffect, useRef} from "react";
 import QRCode from "qrcode.react";
 import './QRCodeGenerate.css'
-import {walletAddress} from "../ConnectWallet/ConnectWallet";
+
 
 const QRCodeGenerate = () => {
     const [url, setUrl] = useState("");

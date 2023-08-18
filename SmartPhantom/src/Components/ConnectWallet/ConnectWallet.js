@@ -5,6 +5,7 @@ import phantomWalletlogo from './img/phantomWalletLogo.jpg';
 const ConnectWallet = () => {
     const [walletAddress, setWalletAddress] = useState(null);
 
+    
     const connectWallet = async () => {
         try {
             if (window.solana) {
@@ -22,9 +23,7 @@ const ConnectWallet = () => {
             console.error(error);
         }
     };
-
-
-
+  
 
     return (
         <div className='connect-Wallet'>
@@ -42,5 +41,5 @@ const ConnectWallet = () => {
         </div>
     );
 };
-export {walletAddress};
+
 export default ConnectWallet;

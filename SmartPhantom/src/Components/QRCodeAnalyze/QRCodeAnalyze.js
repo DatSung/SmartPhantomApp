@@ -1,40 +1,52 @@
-import { Html5QrcodeScanner } from "html5-qrcode";
-import { useEffect, useState } from "react";
+import React, { useState } from 'react';
+import jsQR from 'jsqr';
 
-function QRCodeAnalyze() {
+function QRAnalyze() {
+  const [qrData, setQrData] = useState('');
 
-    const [scanResult, setScanResult] = useState(null);
+  const handleImageUpload = async (e) => {
+    try {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    useEffect(() => {
-        const scanner = new Html5QrcodeScanner('reader', {
-            qrbox: {
-                width: 250,
-                height: 250,
-            },
-            fps: 60,
-        })
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const imageSrc = event.target.result;
 
-        scanner.render(success, error);
+        const img = new Image();
+        img.src = imageSrc;
 
-        function success(result) {
-            scanner.clear();
-            setScanResult(result);
-        }
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, img.width, img.height);
 
-        function error(err) {
-            console.warn(err);
-        }
-    }, []);
+          const imageData = ctx.getImageData(0, 0, img.width, img.height);
+          const code = jsQR(imageData.data, imageData.width, imageData.height);
 
-    return (
-        <div className="QRCodeAnalyze">
-            <h1>QR CODE SCANNING</h1>
-            {scanResult
-                ? <div>{scanResult}</div>
-                : <div id="reader"></div>
-            }
-        </div>
-    )
+          if (code) {
+            setQrData(code.data);
+          } else {
+            console.error('No QR code found.');
+          }
+        };
+      };
+
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div className="QRCodeReader">
+      <h1>QR Code Reader from Image</h1>
+      <input type="file" accept="image/*" onChange={handleImageUpload} />
+      {qrData && <div className="result">{qrData}</div>}
+    </div>
+  );
 }
 
-export default QRCodeAnalyze;
+export default QRAnalyze;
