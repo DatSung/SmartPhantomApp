@@ -42,5 +42,5 @@ const ConnectWallet = () => {
         </div>
     );
 };
-
+export {walletAddress};
 export default ConnectWallet;

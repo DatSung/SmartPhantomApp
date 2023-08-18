@@ -11,7 +11,7 @@ function QRCodeAnalyze() {
                 width: 250,
                 height: 250,
             },
-            fps: 30,
+            fps: 60,
         })
 
         scanner.render(success, error);
@@ -29,12 +29,10 @@ function QRCodeAnalyze() {
     return (
         <div className="QRCodeAnalyze">
             <h1>QR CODE SCANNING</h1>
-            { scanResult
-            ? <div>{scanResult}</div>
-            : <div ></div>
-
+            {scanResult
+                ? <div>{scanResult}</div>
+                : <div id="reader"></div>
             }
-            <div id="reader"></div>
         </div>
     )
 }

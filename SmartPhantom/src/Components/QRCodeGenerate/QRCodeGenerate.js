@@ -1,6 +1,7 @@
 import React, { useState,  useEffect, useRef} from "react";
 import QRCode from "qrcode.react";
 import './QRCodeGenerate.css'
+import {walletAddress} from "../ConnectWallet/ConnectWallet";
 
 const QRCodeGenerate = () => {
     const [url, setUrl] = useState("");
@@ -39,7 +40,7 @@ const QRCodeGenerate = () => {
     }, [noSol]);
 
     return (
-        <div className="app">
+        <div className="app" disabled={walletAddress !== null}>
             <h1 className="app-title">QR CODE GENERATE</h1>
 
             <form className="app-form" onSubmit={handleShow}>
@@ -80,9 +81,12 @@ const QRCodeGenerate = () => {
                         />
                     </div>
                 )}
-                <div className="download_button">
-                    <button onClick={downloadQRCode} disabled={showFlag}>Download QR Code</button>
-                </div>
+                {showFlag && (
+                    <div className="download_button">
+                        <button onClick={downloadQRCode} disabled={!showFlag}>Download QR Code</button>
+                    </div>)
+                }
+                
              
             </div>
         </div>
