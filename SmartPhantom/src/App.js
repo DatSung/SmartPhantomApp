@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import ConnectWallet from "./Components/ConnectWallet/ConnectWallet.js";
 import QRCodeGenerate from "./Components/QRCodeGenerate/QRCodeGenerate.js";
-import QRAnalyze from "./Components/QRAnalyze/QRAnalyze.js";
+// import QRAnalyze from "./Components/QRAnalyze/QRAnalyze.js";
 import "./App.css";
 
 const App = () => {
@@ -41,10 +41,10 @@ const App = () => {
           (option === "generate") &&
           <QRCodeGenerate />
         }
-        {
+        {/* {
           (option === "analyze") &&
           <QRAnalyze />
-        }
+        } */}
       </div>
   
        
