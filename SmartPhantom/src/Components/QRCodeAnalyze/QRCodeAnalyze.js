@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import jsQR from 'jsqr';
+import './QRCodeAnalyze.css'
 
 
 function QRAnalyze() {
@@ -44,7 +45,7 @@ function QRAnalyze() {
 
   return (
     <div className="QRCodeReader">
-      <h1>QR Code Reader from Image</h1>
+      <h1 className='tiltle'>QR CODE READER</h1>
       <input type="file" accept="image/*" onChange={handleImageUpload} />
       {qrData && <div className="result">{qrData}</div>}
     </div>

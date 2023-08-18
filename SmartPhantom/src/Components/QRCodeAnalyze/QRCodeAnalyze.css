@@ -1,0 +1,61 @@
+.QRCodeReader {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 60px;
+    background-image: linear-gradient(to left, rgb(175, 130, 240), rgb(110, 90, 237));
+    opacity: 0.8;
+    transition: 0.5s;
+}
+
+.QRCodeReader:hover {
+    scale: 1.1;
+    transition: 0.5s;
+    opacity: 1;
+}
+
+.QRCodeReader .tiltle {
+    text-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: white;
+    padding: 10px;
+}
+
+.QRCodeReader input::-webkit-file-upload-button {
+    display: none;
+}
+
+.QRCodeReader input {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 20px;
+    transition: 0.5s;
+
+}
+
+.QRCodeReader input:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.6);
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+    .QRCodeReader input {
+        width: 100%;
+    }
+
+    .QRCodeReader {
+        width: 90%;
+    }
+}

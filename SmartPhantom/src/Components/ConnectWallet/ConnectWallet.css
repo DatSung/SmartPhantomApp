@@ -50,3 +50,29 @@
     color: white;
     text-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
 }
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+    .connect-Wallet .notConnect {
+        width: auto;
+        height: auto;
+    }
+
+    .connect-Wallet .notConnect button {
+        padding: 20px;
+    }
+
+    .connect-Wallet .connected {
+        justify-content: space-evenly;
+    }
+
+    .connect-Wallet .connected img {
+        width: 40px;
+        border-radius: 10px;
+    }
+    .connect-Wallet .connected {
+        padding: 10px;
+    }
+}
+
+/*  */
