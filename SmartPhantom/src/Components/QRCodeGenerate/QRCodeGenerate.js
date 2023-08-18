@@ -40,7 +40,7 @@ const QRCodeGenerate = () => {
     }, [noSol]);
 
     return (
-        <div className="app" disabled={walletAddress !== null}>
+        <div className="app" >
             <h1 className="app-title">QR CODE GENERATE</h1>
 
             <form className="app-form" onSubmit={handleShow}>
