@@ -81,7 +81,7 @@ const QRCodeGenerate = () => {
                     </div>
                 )}
                 <div className="download_button">
-                    <button onClick={downloadQRCode} disabled={!showFlag}>Download QR Code</button>
+                    <button onClick={downloadQRCode} disabled={showFlag}>Download QR Code</button>
                 </div>
              
             </div>
