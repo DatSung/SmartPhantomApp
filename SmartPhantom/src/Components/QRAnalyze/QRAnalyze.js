@@ -1,36 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import QrScanner from 'react-qr-scanner';
+import React, { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+import QrReader from 'react-qr-reader';
 
-const QRAnalyze = () => {
-    const [value, setValue] = useState();
-  
-    const handleScan = (value) => {
-      if (value) {
-        setValue(value);
-      }
-    };
-  
-    const handleError = (err) => {
-      console.error(err);
-    };
+const QRCodeAnalyzer = () => {
+  const [qrData, setQrData] = useState('');
+  const [uploadedImage, setUploadedImage] = useState(null);
 
-    const handleQrFile = (e) => {
-        const file = e.target.files[0]
+  const handleScan = (data) => {
+    if (data) {
+      setQrData(data);
     }
-  
-    return (
-      <div>
-        <input type="file" placeholder='your QR' onChange={handleQrFile}></input>
-        {value ? (<div>{value}</div>) : (
-          <QrScanner
+  };
+
+  const handleError = (error) => {
+    console.error(error);
+  };
+
+  const onDrop = (acceptedFiles) => {
+    const imageFile = acceptedFiles[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const imageDataURL = event.target.result;
+      setQrData('');
+      setUploadedImage(imageDataURL);
+    };
+    reader.readAsDataURL(imageFile);
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop,
+  });
+
+  return (
+    <div>
+      <h2>QR Code Analyzer</h2>
+      <div {...getRootProps()} className="dropzone">
+        <input {...getInputProps()} />
+        <p>Drag and drop an image here, or click to select an image.</p>
+      </div>
+      {uploadedImage && (
+        <div className="uploaded-image">
+          <img src={uploadedImage} alt="Uploaded QR Code" />
+          <QrReader
             delay={300}
             onError={handleError}
             onScan={handleScan}
-            style={{ width: '300x' }}
+            style={{ width: '100%' }}
           />
-        )}
-      </div>
-    );
-  };
-  
-  export default QRAnalyze;
+          {qrData && <p>QR Code Data: {qrData}</p>}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default QRCodeAnalyzer;
