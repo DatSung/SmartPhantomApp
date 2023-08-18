@@ -4,7 +4,6 @@ import phantomWalletlogo from './img/phantomWalletLogo.jpg';
 
 const ConnectWallet = () => {
     const [walletAddress, setWalletAddress] = useState(null);
-
     
     const connectWallet = async () => {
         try {
@@ -24,7 +23,7 @@ const ConnectWallet = () => {
         }
     };
   
-
+  
     return (
         <div className='connect-Wallet'>
             {walletAddress && (

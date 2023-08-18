@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import jsQR from 'jsqr';
 
+
 function QRAnalyze() {
+
   const [qrData, setQrData] = useState('');
 
   const handleImageUpload = async (e) => {
