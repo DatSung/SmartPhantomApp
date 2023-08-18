@@ -53,3 +53,18 @@
   margin-bottom: 20px;
   cursor: pointer;
 }
+
+.download_button{
+  margin-top: 20px;
+}
+
+.download_button button{
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.45);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
