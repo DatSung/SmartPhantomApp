@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const SendMoneyComponent = () => {
   const [response, setResponse] = useState('');
-  
+
   const sendMoney = async () => {
     try {
       const response = await axios.post(
@@ -20,14 +20,14 @@ const SendMoneyComponent = () => {
           }
         }
       );
-      
+
       setResponse(JSON.stringify(response.data, null, 2));
     } catch (error) {
       setResponse('An error occurred.');
       console.error(error);
     }
   };
-  
+
   return (
     <div>
       <button onClick={sendMoney}>Gửi tiền từ ví Phantom</button>
