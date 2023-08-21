@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './ConnectWallet.css';
 import phantomWalletlogo from './img/phantomWalletLogo.jpg';
+import { setWalletAddress } from './WalletService'; // Import hàm setWalletAddress từ file WalletService.js
 
 const ConnectWallet = () => {
-    const [walletAddress, setWalletAddress] = useState(null);
-    
+    const [walletAddress, setWalletAddressLocal] = useState(null);
+
     const connectWallet = async () => {
         try {
             if (window.solana) {
@@ -13,7 +14,8 @@ const ConnectWallet = () => {
                     console.log('Phantom wallet found');
                     const res = await solana.connect({ onlyIftrust: true });
                     console.log(res.publicKey.toString());
-                    setWalletAddress(res.publicKey.toString());
+                    setWalletAddressLocal(res.publicKey.toString()); // Lưu trạng thái local
+                    setWalletAddress(res.publicKey.toString()); // Lưu trạng thái toàn cục bằng cách gọi hàm setWalletAddress
                 }
             } else {
                 alert('Solana object not found! Get a Phantom Wallet 👻');
@@ -22,11 +24,11 @@ const ConnectWallet = () => {
             console.error(error);
         }
     };
-  
-  
+
+
     return (
         <div className='connect-Wallet'>
-            {walletAddress && ( 
+            {walletAddress && (
                 <div className='connected'>
                     <img className='phantom-Wallet-Logo' src={phantomWalletlogo} alt='Phantom Wallet Logo' />
                     <span className='phantom-Wallet-Address'>{`${walletAddress.substring(0, 6)}...${walletAddress.substring(38)}`}</span>

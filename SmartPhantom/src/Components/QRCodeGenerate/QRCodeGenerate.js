@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import QRCode from "qrcode.react";
+import { getWalletAddress } from "../ConnectWallet/WalletService";
 import './QRCodeGenerate.css'
 
 
 const QRCodeGenerate = () => {
-    const [url, setUrl] = useState("");
+    const [url, setUrl] = useState(getWalletAddress);
     const [showFlag, setShowFlag] = useState(false);
     const [noSol, setNoSol] = useState(0);
     const [isNumber, setIsNumber] = useState(true);
