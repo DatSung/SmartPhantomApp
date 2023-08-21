@@ -1,4 +1,4 @@
-import React, { useState,  useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import QRCode from "qrcode.react";
 import './QRCodeGenerate.css'
 
@@ -86,8 +86,8 @@ const QRCodeGenerate = () => {
                         <button onClick={downloadQRCode} disabled={!showFlag}>Download QR Code</button>
                     </div>)
                 }
-                
-             
+
+
             </div>
         </div>
     );
