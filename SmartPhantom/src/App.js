@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ConnectWallet from "./Components/ConnectWallet/ConnectWallet.js";
 import QRCodeGenerate from "./Components/QRCodeGenerate/QRCodeGenerate.js";
 import QRCodeAnalyze from "./Components/QRCodeAnalyze/QRCodeAnalyze.js";
-// import QRAnalyze from "./Components/QRAnalyze/QRAnalyze.js";
+import Transaction from "./Components/Transaction/Transaction.js";
+import SendMoneyComponent from "./Components/Transaction/SendMoneyComponent.js";
+import ListAll from "./Components/ListAll/ListAll.js";
+import Details from "./Components/ListAll/Detail.js";
 import "./App.css";
 
 const App = () => {
@@ -17,10 +20,19 @@ const App = () => {
 
 
   return (
+
     <div className="container">
 
-      <header className="header">
+      <div className="App">
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<ListAll />} />
+            <Route exact path="/view-details" element={<Details />} />
+          </Routes>
+        </Router>
+      </div>
 
+      <header className="header">
         <div className="header-wrapper">
 
           <div className="nav-button-list">
@@ -46,9 +58,15 @@ const App = () => {
           (option === "analyze") &&
           <QRCodeAnalyze />
         }
+        {
+          (option === "chat") &&
+
+          <Transaction />
+
+        }
       </div>
-  
-       
+
+
 
 
 
