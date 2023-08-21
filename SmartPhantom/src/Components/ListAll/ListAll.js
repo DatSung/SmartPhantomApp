@@ -72,13 +72,13 @@ const ListAll = () => {
         <div>
             <div className="container py-3">
                 <div className="card border border-primary p-5">
-                    <h2 className="display-4 text-center">
+                    {/* <h2 className="display-4 text-center">
                         List All Your Fungible Tokens using Shyft APIs
-                    </h2>
+                    </h2> */}
                     {!walletAddress && (<div>
-                        <h4 className="text-center py-3 text-primary">
+                        {/* <h4 className="text-center py-3 text-primary">
                             Connect Your Wallet to get started
-                        </h4>
+                        </h4> */}
                         <div className="text-center pt-3">
                             <button
                                 className="btn btn-primary px-4 py-2"
@@ -103,7 +103,7 @@ const ListAll = () => {
                             <option value="mainnet-beta">Mainnet Beta</option>
                         </select>
                     </div>
-                    <div className="card mt-3 py-3 border-0">
+                    {/* <div className="card mt-3 py-3 border-0">
                         <table className="table w-75 mx-auto text-center">
                             <thead>
                                 <tr>
@@ -132,7 +132,7 @@ const ListAll = () => {
                                     ))}
                             </tbody>
                         </table>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
