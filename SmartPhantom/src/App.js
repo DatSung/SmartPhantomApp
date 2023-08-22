@@ -3,6 +3,7 @@ import ConnectWallet from "./Components/ConnectWallet/ConnectWallet.js";
 import QRCodeGenerate from "./Components/QRCodeGenerate/QRCodeGenerate.js";
 import QRCodeAnalyze from "./Components/QRCodeAnalyze/QRCodeAnalyze.js";
 import { getUserWalletAddress } from "./Components/ConnectWallet/WalletService.js";
+import TransferToken from "./Components/Transaction/Transaction.js";
 import "./App.css";
 
 const App = () => {
@@ -44,6 +45,10 @@ const App = () => {
         {
           (option === "analyze") &&
           <QRCodeAnalyze />
+        }
+        {
+          (option === "chat") &&
+          <TransferToken/>
         }
       </div>)
 
