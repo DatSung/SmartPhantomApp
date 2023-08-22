@@ -1,28 +1,24 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ConnectWallet from "./Components/ConnectWallet/ConnectWallet.js";
 import QRCodeGenerate from "./Components/QRCodeGenerate/QRCodeGenerate.js";
 import QRCodeAnalyze from "./Components/QRCodeAnalyze/QRCodeAnalyze.js";
-import Transaction1 from "./Components/Transaction/Transaction.js";
-import SendMoneyComponent from "./Components/Transaction/SendMoneyComponent.js";
-import ListAll from "./Components/ListAll/ListAll.js";
-import Details from "./Components/ListAll/Detail.js";
+import { getUserWalletAddress } from "./Components/ConnectWallet/WalletService.js";
 import "./App.css";
 
 const App = () => {
   const [option, setOption] = useState('generate')
-
+  const [flag, setflag] = useState(false)
   const handleNav = (e) => {
     setOption(e.target.value)
   }
-
-
-
+  const handleShow = () =>{
+    setflag(true)
+  } 
 
   return (
 
     <div className="container">
-      
+
       <header className="header">
         <div className="header-wrapper">
 
@@ -31,16 +27,16 @@ const App = () => {
             <button type="button" value="analyze" onClick={handleNav}>Analyze</button>
             <button type="button" value="chat" onClick={handleNav}>Chat</button>
           </div>
-
-          <div className="connect-Wallet-Button">
-            <ConnectWallet />
+          <div className="connect-Wallet-Button" onClick={handleShow}>
+            <ConnectWallet  />
           </div>
-
         </div>
-
       </header>
 
-      <div>
+
+      {
+        flag == true &&
+        (<div>
         {
           (option === "generate") &&
           <QRCodeGenerate />
@@ -49,14 +45,10 @@ const App = () => {
           (option === "analyze") &&
           <QRCodeAnalyze />
         }
-        {
-          (option === "chat") &&
+      </div>)
 
-          <Transaction1 />
-
-        }
-      </div>
-
+      }
+      
 
 
 

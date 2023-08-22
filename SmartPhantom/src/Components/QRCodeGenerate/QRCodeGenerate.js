@@ -30,10 +30,10 @@ const QRCodeGenerate = () => {
             setShowFlag(true);
         }
     };
-    
+
     useEffect(() => {
         // Cập nhật WalletAddress
-        setUrl(getUserWalletAddress)
+        setUrl(getUserWalletAddress);
         // Kiểm tra xem noSol có phải là số hay không
         if (isNaN(noSol) || noSol < 0) {
             setIsNumber(false);
@@ -41,16 +41,17 @@ const QRCodeGenerate = () => {
         } else {
             setIsNumber(true);
         }
-    }, [noSol]);
+    }, [noSol, url]);
 
     return (
         <div className="app" >
             <h1 className="app-title">QR CODE GENERATE</h1>
 
             <form className="app-form" onSubmit={handleShow}>
-                <label for="sol">Enter your Sols</label>
+                <labe for="sol">Enter your sols</labe>
                 <br></br>
                 <input
+                    id = 'sol'
                     required
                     type="text"
                     value={noSol}

@@ -13,7 +13,7 @@ const ConnectWallet = () => {
                 if (solana.isPhantom) {
                     console.log('Phantom wallet found');
                     const res = await solana.connect({ onlyIftrust: true });
-                    console.log(res.publicKey.toString());
+                    // console.log(res.publicKey.toString());
                     setWalletAddressLocal(res.publicKey.toString()); // Lưu trạng thái local
                     setUserWalletAddress(res.publicKey.toString()); // Lưu trạng thái toàn cục bằng cách gọi hàm setUserWalletAddress
                 }

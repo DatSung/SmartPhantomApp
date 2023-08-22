@@ -1,49 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import {
-  clusterApiUrl,
-  Keypair,
-  PublicKey,
-  SystemProgram,
-  Transaction,
-  Connection,
-} from '@solana/web3.js';
+import React from "react";
 
-function TransferComponent() {
-  const [encodedTransaction, setEncodedTransaction] = useState('');
+const SendSOL = ({ network, fromAddress, toAddress, amount }) => {
+  const sendSOL = () => {
+    const myHeaders = new Headers();
+    myHeaders.append("x-api-key", "pixsiRaAQH5riAVC");
+    myHeaders.append("Content-Type", "application/json");
 
-  useEffect(() => {
-    async function createTransferInstruction() {
-      const fromPubKey = new PublicKey('GE4kh5FsCDWeJfqLsKx7zC9ijkqKpCuYQxh8FYBiTJe');
-      const toPubKey = new PublicKey('AaYFExyZuMHbJHzjimKyQBAH1yfA9sKTxSzBc6Nr5X4s');
-      const lamports = 100000000;
+    const raw = JSON.stringify({
+      network,
+      from_address: fromAddress,
+      to_address: toAddress,
+      amount,
+    });
 
-      const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
-      const blockhash = (await connection.getLatestBlockhash('finalized')).blockhash;
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
 
-      const tx = new Transaction().add(
-        SystemProgram.transfer({
-          fromPubkey: fromPubKey,
-          toPubkey: toPubKey,
-          lamports: lamports,
-        })
-      );
-      tx.feePayer = fromPubKey;
-      tx.recentBlockhash = blockhash;
-
-      const serializedTransaction = tx.serializeMessage();
-      const encodedTx = Buffer.from(serializedTransaction).toString('base64');
-
-      setEncodedTransaction(encodedTx);
-    }
-
-    createTransferInstruction();
-  }, []);
+    fetch("https://api.shyft.to/sol/v1/wallet/send_sol", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
 
   return (
-    <div>
-      <p>Encoded Transaction: {encodedTransaction}</p>
-    </div>
+    <button onClick={sendSOL}>Send SOL</button>
   );
-}
+};
 
-export default TransferComponent;
+export default SendSOL;
