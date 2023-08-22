@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ConnectWallet.css';
 import phantomWalletlogo from './img/phantomWalletLogo.jpg';
-import { setWalletAddress } from './WalletService'; // Import hàm setWalletAddress từ file WalletService.js
+import { setUserWalletAddress } from './WalletService'; // Import hàm setWalletAddress từ file WalletService.js
 
 const ConnectWallet = () => {
     const [walletAddress, setWalletAddressLocal] = useState(null);
@@ -15,7 +15,7 @@ const ConnectWallet = () => {
                     const res = await solana.connect({ onlyIftrust: true });
                     console.log(res.publicKey.toString());
                     setWalletAddressLocal(res.publicKey.toString()); // Lưu trạng thái local
-                    setWalletAddress(res.publicKey.toString()); // Lưu trạng thái toàn cục bằng cách gọi hàm setWalletAddress
+                    setUserWalletAddress(res.publicKey.toString()); // Lưu trạng thái toàn cục bằng cách gọi hàm setUserWalletAddress
                 }
             } else {
                 alert('Solana object not found! Get a Phantom Wallet 👻');

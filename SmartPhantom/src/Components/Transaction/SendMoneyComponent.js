@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getUserWalletAddress } from '../ConnectWallet/WalletService';
 import axios from 'axios';
 
 const SendMoneyComponent = () => {
@@ -10,7 +11,7 @@ const SendMoneyComponent = () => {
         'https://api.shyft.to/sol/v1/wallet/send_sol',
         {
           network: 'devnet',
-          from_address: 'FPbUm1gvV84BAretoxcNr4ByiPdf1muhZ1m4SQTPm9NG',
+          from_address: getUserWalletAddress,
           to_address: 'EBCyML6yhE8jRLDKDaFiTwfpdwHNyxrV4xC5aRYZgTrS',
           amount: 0.322
         },

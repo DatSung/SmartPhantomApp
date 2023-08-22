@@ -1,37 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  clusterApiUrl,
+  Keypair,
+  PublicKey,
+  SystemProgram,
+  Transaction,
+  Connection,
+} from '@solana/web3.js';
 
-function Transaction() {
+function TransferComponent() {
   const [encodedTransaction, setEncodedTransaction] = useState('');
-  const [decodedTransaction, setDecodedTransaction] = useState('');
 
-  const handleDecode = async () => {
-    try {
-      const response = await fetch(`https://shyft-insider.vercel.app/api/decode-transaction?encodedTransaction=${encodedTransaction}`);
-      const data = await response.json();
-      setDecodedTransaction(JSON.stringify(data, null, 2));
-    } catch (error) {
-      console.error('Error:', error);
-      setDecodedTransaction('Error decoding transaction.');
+  useEffect(() => {
+    async function createTransferInstruction() {
+      const fromPubKey = new PublicKey('GE4kh5FsCDWeJfqLsKx7zC9ijkqKpCuYQxh8FYBiTJe');
+      const toPubKey = new PublicKey('AaYFExyZuMHbJHzjimKyQBAH1yfA9sKTxSzBc6Nr5X4s');
+      const lamports = 100000000;
+
+      const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+      const blockhash = (await connection.getLatestBlockhash('finalized')).blockhash;
+
+      const tx = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: fromPubKey,
+          toPubkey: toPubKey,
+          lamports: lamports,
+        })
+      );
+      tx.feePayer = fromPubKey;
+      tx.recentBlockhash = blockhash;
+
+      const serializedTransaction = tx.serializeMessage();
+      const encodedTx = Buffer.from(serializedTransaction).toString('base64');
+
+      setEncodedTransaction(encodedTx);
     }
-  };
+
+    createTransferInstruction();
+  }, []);
 
   return (
-    <div className="App">
-      <h2>Transaction Decoder</h2>
-      <textarea
-        rows="5"
-        placeholder="Paste encoded transaction here..."
-        value={encodedTransaction}
-        onChange={(e) => setEncodedTransaction(e.target.value)}
-      />
-      <button onClick={handleDecode}>Decode</button>
-
-      <div>
-        <h3>Decoded Transaction:</h3>
-        <pre>{decodedTransaction}</pre>
-      </div>
+    <div>
+      <p>Encoded Transaction: {encodedTransaction}</p>
     </div>
   );
 }
 
-export default Transaction
+export default TransferComponent;

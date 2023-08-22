@@ -1,9 +1,9 @@
-let walletAddress = null;
+let userWalletAddress = null;
 
-export const setWalletAddress = (address) => {
-    walletAddress = address;
+export const setUserWalletAddress = (address) => {
+    userWalletAddress = address;
 };
 
-export const getWalletAddress = () => {
-    return walletAddress;
+export const getUserWalletAddress = () => {
+    return userWalletAddress;
 };

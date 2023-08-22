@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import QRCode from "qrcode.react";
-import { getWalletAddress } from "../ConnectWallet/WalletService";
+import { getUserWalletAddress } from "../ConnectWallet/WalletService";
 import './QRCodeGenerate.css'
 
 
 const QRCodeGenerate = () => {
-    const [url, setUrl] = useState(getWalletAddress);
+    const [url, setUrl] = useState(getUserWalletAddress);
     const [showFlag, setShowFlag] = useState(false);
     const [noSol, setNoSol] = useState(0);
     const [isNumber, setIsNumber] = useState(true);
@@ -30,10 +30,10 @@ const QRCodeGenerate = () => {
             setShowFlag(true);
         }
     };
-
+    
     useEffect(() => {
         // Cập nhật WalletAddress
-        setUrl(getWalletAddress)
+        setUrl(getUserWalletAddress)
         // Kiểm tra xem noSol có phải là số hay không
         if (isNaN(noSol) || noSol < 0) {
             setIsNumber(false);
