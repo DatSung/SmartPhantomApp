@@ -48,10 +48,10 @@ const QRCodeGenerate = () => {
             <h1 className="app-title">QR CODE GENERATE</h1>
 
             <form className="app-form" onSubmit={handleShow}>
-                <labe for="sol">Enter your sols</labe>
+                <label>Enter your sols</label>
                 <br></br>
                 <input
-                    id = 'sol'
+                    id="sol"
                     required
                     type="text"
                     value={noSol}

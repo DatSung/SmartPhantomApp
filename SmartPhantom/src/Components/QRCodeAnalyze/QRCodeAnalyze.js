@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import jsQR from 'jsqr';
 import './QRCodeAnalyze.css'
+import TransferSol from '../Transaction/TransferSol';
+import { setSendingSol } from '../ConnectWallet/WalletService';
+import { setTargetWalletAddress } from '../ConnectWallet/WalletService';
 
-
-function QRAnalyze() {
+const QRAnalyze = () => {
 
   const [qrData, setQrData] = useState('');
 
@@ -31,6 +33,8 @@ function QRAnalyze() {
 
           if (code) {
             setQrData(code.data);
+            setSendingSol(code.data)
+            setTargetWalletAddress(code.data)
           } else {
             console.error('No QR code found.');
           }
@@ -47,7 +51,7 @@ function QRAnalyze() {
     <div className="QRCodeReader">
       <h1 className='tiltle'>QR CODE READER</h1>
       <input type="file" accept="image/*" onChange={handleImageUpload} />
-      {qrData && <div className="result">{qrData}</div>}
+      <TransferSol qrCode = {qrData}/>
     </div>
   );
 }
